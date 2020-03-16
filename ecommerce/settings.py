@@ -129,7 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
+    os.path.join(BASE_DIR, "core/static")
 ]
 
 # Update database configuration with $DATABASE_URL
@@ -143,7 +143,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static files
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'core/static')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 try:
     from .local_settings import *
