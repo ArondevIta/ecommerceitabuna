@@ -128,9 +128,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "core/static")
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "core/static")
+# ]
 
 # Update database configuration with $DATABASE_URL
 db_from_env = dj_database_url.config(conn_max_age=500)
