@@ -1,9 +1,12 @@
 from django.shortcuts import render
-
+from catalog.models import Category, Product
 
 def index(request):
     template_name = 'index.html'
-    return render(request, template_name)
+    context = {
+        'categories': Category.objects.all()
+    }
+    return render(request, template_name, context)
 
 
 def contato(request):
