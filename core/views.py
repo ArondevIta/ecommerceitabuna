@@ -1,17 +1,30 @@
 from django.shortcuts import render
 from catalog.models import Category, Product
+from django.views.generic import View, TemplateView
 
-def index(request):
+from .forms import ContactForm
+
+
+class IndexView(TemplateView):
+
     template_name = 'index.html'
-    context = {
-        'categories': Category.objects.all()
-    }
-    return render(request, template_name, context)
+
+
+index = IndexView.as_view()
 
 
 def contato(request):
     template_name = 'contact.html'
-    return render(request, template_name)
+    success = False
+    form = ContactForm(request.POST or None)
+    if form.is_valid():
+        form.send_mail()
+        success = True
+    context = {
+        'form': form,
+        'success': success
+    }
+    return render(request, template_name, context)
 
 
 def product_list(request):
