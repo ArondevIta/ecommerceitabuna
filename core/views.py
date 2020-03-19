@@ -1,16 +1,21 @@
 from django.shortcuts import render
-from catalog.models import Category, Product
-from django.views.generic import View, TemplateView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, CreateView
 
 from .forms import ContactForm
 
 
-class IndexView(TemplateView):
+User = get_user_model()
+
+
+class IndexViewConta(TemplateView):
 
     template_name = 'index.html'
 
 
-index = IndexView.as_view()
+index = IndexViewConta.as_view()
 
 
 def contato(request):
@@ -27,11 +32,12 @@ def contato(request):
     return render(request, template_name, context)
 
 
-def product_list(request):
-    template_name = 'product_list.html'
-    return render(request, template_name)
+class RegisterView(CreateView):
+
+    form_class = UserCreationForm
+    template_name = 'register.html'
+    model = User
+    success_url = reverse_lazy('login')
 
 
-def product(request):
-    template_name = 'product.html'
-    return render(request, template_name)
+register = RegisterView.as_view()
